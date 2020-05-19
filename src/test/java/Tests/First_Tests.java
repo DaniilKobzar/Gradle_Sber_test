@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class First_Tests {
 
-    @Test(description = "Перейти на сайт", groups = "TC-1")
+    @Test(description = "Перейти на сайт", groups = "TC")
     public void goToWebsite() {
         open("https://www.sberbank.ru/ru/person");
         //$(withText("Генеральная лицензия")).scrollIntoView(true);
@@ -16,7 +16,7 @@ public class First_Tests {
 
     }
 
-    @Test(description = "Авторизация в демо режиме", groups = "TC-2")
+    @Test(description = "Авторизация в демо режиме", groups = "TC")
     public void demoAuthorization() {
         goToWebsite();
         $(By.xpath("//div[contains(@class,'ya-site-form-search__button ya-site-form-search_visible')]")).click();
@@ -32,9 +32,10 @@ public class First_Tests {
         $(By.name("$$confirmSmsPassword")).setValue("12345");
         $(By.xpath("//div[@class='clientButton']//div[contains(@class,'buttonGreen')]")).click();
         $(byText("Выключить обучение")).click();
+        closeWebDriver();
     }
 
-    @Test(description = "Переход в демо Сбербанк бизнес онлайн", groups = "TC-3")
+    @Test(description = "Переход в демо Сбербанк бизнес онлайн", groups = "TC")
     public void goToBussinessDemo() {
         goToWebsite();
         $(By.xpath("//div[contains(@class,'ya-site-form-search__button ya-site-form-search_visible')]")).click();
@@ -44,24 +45,28 @@ public class First_Tests {
         $(By.xpath("//a[@class='b-btn btn-inverse b-btn_green-hover']")).click();
         $(byClassName("link-outer")).click();
         $(byText("Войти в демо-режим")).click();
+        closeWebDriver();
+
     }
 
-    @Test(description = "Поиск и клик вакансий", groups = "TC-4")
+    @Test(description = "Поиск и клик вакансий", groups = "TC")
     public void searchVacanciesAndClick() {
         goToWebsite();
         $(byXpath("//div[contains(@class,'kit-col kit-col_xs_12 kit-col_md_7 kit-col_lg_7 footer__subfooter-col')]//li[3]//a[1]")).scrollIntoView(true).click();
         $(byClassName("career__search-input")).setValue("Тестировщик").pressEnter();
         switchTo().window(1);
         $(withText("Автотестировщик")).click();
+        closeWebDriver();
     }
 
-    @Test(description = "Переход в раздел о банке, оценить статью и отправить отзыв", groups = "TC-5")
-    public void goToInfoAboutBank() throws InterruptedException {
+    @Test(description = "Переход в раздел о банке, оценить статью и отправить отзыв", groups = "TC")
+    public void goToInfoAboutBank() {
         goToWebsite();
         $(byXpath("//div[contains(@class,'kit-col kit-col_xs_12 kit-col_md_7 kit-col_lg_7 footer__subfooter-col')]//li[2]//a[1]")).scrollIntoView(true).click();
         $(byText("Страница была вам полезна?")).scrollIntoView(true);
         $(byClassName("form-like__icon-like")).click();
         $(byXpath("//textarea[contains(@placeholder,'Что мы могли бы улучшить?')]")).setValue("бла-бла");
+        closeWebDriver();
     }
 
 }
